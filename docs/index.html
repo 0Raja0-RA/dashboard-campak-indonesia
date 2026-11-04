@@ -183,7 +183,7 @@
     <!-- PEMILIK: Anggota C -->
     <section class="page" data-page="provinsi" aria-labelledby="h-provinsi" hidden>
       <div class="head">
-        <div class="eyebrow">Babak 3 · Penjelasan</div>
+          <div class="eyebrow">Babak 3 &middot; Penjelasan</div>
         <h1 id="h-provinsi">Provinsi di Jawa-Bali lebih terlindungi: median 72,6% vs 63,6%</h1>
         <p class="lede">Celahnya tidak merata. Empat provinsi masih di bawah 50%, dan tiga terendah tertinggal jauh dari yang lain.</p>
       </div>
@@ -193,39 +193,45 @@
         <div class="card kpi"><span class="kic t-amber"><svg class="ic"><use href="#i-alert"></use></svg></span><div><span class="label">Provinsi di bawah 50%</span><span class="value">4</span><span class="foot">dari 38 provinsi</span></div></div>
         <div class="card kpi"><span class="kic t-kasus"><svg class="ic"><use href="#i-pin2"></use></svg></span><div><span class="label">Terendah</span><span class="value">27,8%</span><span class="foot">Aceh</span></div></div>
       </div>
-      <div class="card">
-        <div class="toolbar">
-          <h2>Peta Sebaran Imunisasi Campak Balita di 38 Provinsi (2025)</h2>
+      <!-- Dua visualisasi berdampingan (kiri peta, kanan 10 terendah) tanpa perlu scroll -->
+      <div class="grid g-2e">
+        <div class="card">
+          <div class="toolbar">
+            <h2>Peta Sebaran Imunisasi 38 Provinsi (2025)</h2>
+          </div>
+          <p class="sub">Sebaran geografis 38 provinsi (BPS 2025). Arahkan kursor untuk nama, klik provinsi untuk data detail.</p>
+          <div class="legend" id="lg-peta">
+            <span><i class="key box" style="background:var(--kasus)"></i>Kritis (&lt;50%)</span>
+            <span><i class="key box" style="background:var(--konteks)"></i>Sedang (50%–70%)</span>
+              <span><i class="key box" style="background:var(--vaksin)"></i>Tinggi (&ge;70%)</span>
+          </div>
+          <div class="chart" id="c-peta" style="position:relative; width:100%;"></div>
+            <div id="peta-detail" style="margin-top:auto; padding:10px 14px; border-radius:12px; background:var(--surface-2); border:1px solid var(--line); border-left:4px solid var(--line); min-height:48px; display:flex; align-items:center; transition:all .2s ease;"></div>
         </div>
-        <p class="sub">Sebaran geografis capaian imunisasi balita per provinsi (BPS 2025). Arahkan kursor untuk melihat nama wilayah, atau klik provinsi untuk mengunci data detail.</p>
-        <div class="legend" id="lg-peta">
-          <span><i class="key box" style="background:var(--kasus)"></i>Kritis (&lt;50%)</span>
-          <span><i class="key box" style="background:var(--konteks)"></i>Sedang (50%–70%)</span>
-          <span><i class="key box" style="background:var(--vaksin)"></i>Tinggi (≥70%)</span>
-        </div>
-        <div class="chart" id="c-peta" style="position:relative; width:100%; min-height:300px;"></div>
-      </div>
-      <div class="card">
-        <div class="toolbar">
-          <h2>Aceh, Papua Pegunungan, dan Sumatera Barat paling tertinggal</h2>
-          <div class="seg" role="group" aria-label="Tampilkan">
-            <button type="button" data-f="semua" aria-pressed="true">Semua</button>
-            <button type="button" data-f="Jawa-Bali" aria-pressed="false">Jawa-Bali</button>
-            <button type="button" data-f="Luar Jawa-Bali" aria-pressed="false">Luar Jawa-Bali</button>
+        <div class="card">
+          <div class="toolbar">
+            <h2>10 Provinsi Cakupan Terendah</h2>
+            <div class="seg" role="group" aria-label="Tampilkan">
+              <button type="button" data-f="semua" aria-pressed="true">Semua</button>
+              <button type="button" data-f="Jawa-Bali" aria-pressed="false">Jawa-Bali</button>
+              <button type="button" data-f="Luar Jawa-Bali" aria-pressed="false">Luar Jawa-Bali</button>
+            </div>
+          </div>
+          <p class="sub">10 provinsi imunisasi terendah (survei BPS 2025).</p>
+          <div class="legend">
+            <span><i class="key box" style="background:var(--vaksin)"></i>Jawa-Bali</span>
+            <span><i class="key box" style="background:var(--konteks)"></i>Luar Jawa-Bali</span>
+            <span><i class="key box" style="background:var(--kasus)"></i>Tiga terendah</span>
+          </div>
+          <div class="chart" id="c-prov"></div>
+          <div class="chips" style="margin-top:auto">
+            <span class="chip"><span class="t">MANN-WHITNEY</span><b>Jawa-Bali vs luar</b>p = 0,024</span>
+            <span class="chip"><span class="t">KRUSKAL-WALLIS</span><b>7 wilayah</b>p = 0,12</span>
           </div>
         </div>
-        <p class="sub">10 provinsi dengan cakupan imunisasi campak terendah (survei BPS 2025). Seluruh 38 provinsi dapat dilihat pada tabel data di bawah.</p>
-        <div class="legend">
-          <span><i class="key box" style="background:var(--vaksin)"></i>Jawa-Bali</span>
-          <span><i class="key box" style="background:var(--konteks)"></i>Luar Jawa-Bali</span>
-          <span><i class="key box" style="background:var(--kasus)"></i>Tiga terendah</span>
-        </div>
-        <div class="chart" id="c-prov"></div>
-        <div class="chips">
-          <span class="chip"><span class="t">MANN-WHITNEY</span><b>Jawa-Bali vs luar</b>p = 0,024</span>
-          <span class="chip"><span class="t">KRUSKAL-WALLIS</span><b>7 wilayah</b>p = 0,12, belum terbukti berbeda</span>
-        </div>
-        <details><summary>Lihat tabel data</summary><div class="table-wrap" id="tb-prov"></div></details>
+      </div>
+      <div class="card">
+        <details><summary>Lihat tabel data lengkap 38 provinsi</summary><div class="table-wrap" id="tb-prov" style="margin-top:8px"></div></details>
       </div>
       <div class="note-box"><span class="kic t-vaksin" style="width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none"><svg class="ic"><use href="#i-book"></use></svg></span><span><b>Catatan metodologi.</b> Indikator ini dari survei BPS (balita yang pernah diimunisasi), bukan cakupan dua dosis WUENIC, sehingga tidak dibandingkan dengan target 95%. Kesimpulannya berlaku untuk wilayah, bukan untuk setiap keluarga di dalamnya.</span></div>
       <nav class="pager" aria-label="Halaman"><a href="#celah">← Celah imunitas</a><a class="next" href="#proyeksi">Lanjut: Proyeksi &amp; aksi →</a></nav>
