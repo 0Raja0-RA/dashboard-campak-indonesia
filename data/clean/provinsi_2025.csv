@@ -1,0 +1,39 @@
+kode_prov,provinsi,tahun,imunisasi_campak_pct,kelompok,peringkat
+34,DI Yogyakarta,2025,83.42,>=70%,1
+51,Bali,2025,79.62,>=70%,2
+31,DKI Jakarta,2025,73.61,>=70%,3
+33,Jawa Tengah,2025,72.61,>=70%,4
+53,Nusa Tenggara Timur,2025,72.54,>=70%,5
+71,Sulawesi Utara,2025,72.22,>=70%,6
+93,Papua Selatan,2025,72.1,>=70%,7
+64,Kalimantan Timur,2025,71.76,>=70%,8
+21,Kepulauan Riau,2025,69.84,50-70%,9
+17,Bengkulu,2025,68.68,50-70%,10
+35,Jawa Timur,2025,68.66,50-70%,11
+18,Lampung,2025,68.45,50-70%,12
+96,Papua Barat Daya,2025,67.72,50-70%,13
+75,Gorontalo,2025,67.63,50-70%,14
+52,Nusa Tenggara Barat,2025,67.58,50-70%,15
+65,Kalimantan Utara,2025,66.33,50-70%,16
+74,Sulawesi Tenggara,2025,66.22,50-70%,17
+92,Papua Barat,2025,65.94,50-70%,18
+73,Sulawesi Selatan,2025,65.71,50-70%,19
+91,Papua,2025,65.47,50-70%,20
+19,Kepulauan Bangka Belitung,2025,63.63,50-70%,21
+82,Maluku Utara,2025,63.54,50-70%,22
+72,Sulawesi Tengah,2025,62.06,50-70%,23
+32,Jawa Barat,2025,61.8,50-70%,24
+16,Sumatera Selatan,2025,60.72,50-70%,25
+63,Kalimantan Selatan,2025,60.68,50-70%,26
+81,Maluku,2025,60.45,50-70%,27
+62,Kalimantan Tengah,2025,59.65,50-70%,28
+15,Jambi,2025,59.16,50-70%,29
+61,Kalimantan Barat,2025,58.84,50-70%,30
+76,Sulawesi Barat,2025,57.79,50-70%,31
+36,Banten,2025,55.35,50-70%,32
+12,Sumatera Utara,2025,53.25,50-70%,33
+14,Riau,2025,51.78,50-70%,34
+94,Papua Tengah,2025,48.91,<50%,35
+13,Sumatera Barat,2025,43.5,<50%,36
+95,Papua Pegunungan,2025,36.69,<50%,37
+11,Aceh,2025,27.79,<50%,38

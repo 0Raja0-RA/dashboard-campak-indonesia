@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+
+# File sementara Microsoft Office
+~$*
+
+# Tidak ada file data di atas 50 MB saat ini.
+# Kalau nanti ada, tulis namanya di sini satu per satu (GitHub menolak file > 100 MB).

@@ -1,0 +1,6 @@
+# Diuji dengan Python 3.12: pandas 2.2.2, numpy 2.2.6, scipy 1.13.1, matplotlib 3.10.0
+pandas>=2.2
+numpy>=1.26
+scipy>=1.13
+matplotlib>=3.8   # grafik pratinjau di notebooks/02_provinsi.ipynb
+jupyter>=1.1      # menjalankan notebook (sudah termasuk JupyterLab)

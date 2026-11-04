@@ -1,0 +1,11 @@
+iso3,negara,tahun,kasus_dilaporkan,mcv1_wuenic,mcv2_wuenic,selisih_mcv1_mcv2,kurang_dari_95_mcv1,kurang_dari_95_mcv2
+IDN,Indonesia,2016,6962,88,55,33,True,True
+IDN,Indonesia,2017,9035,90,63,27,True,True
+IDN,Indonesia,2018,5300,89,67,22,True,True
+IDN,Indonesia,2019,1965,88,71,17,True,True
+IDN,Indonesia,2020,524,76,60,16,True,True
+IDN,Indonesia,2021,394,72,53,19,True,True
+IDN,Indonesia,2022,7704,92,71,21,True,True
+IDN,Indonesia,2023,18063,82,69,13,True,True
+IDN,Indonesia,2024,6328,85,82,3,True,True
+IDN,Indonesia,2025,,85,78,7,True,True
