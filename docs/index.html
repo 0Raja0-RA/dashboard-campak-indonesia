@@ -117,49 +117,65 @@
       <div class="head">
         <div class="eyebrow">Babak 2 · Masalah dan konteks</div>
         <h1 id="h-celah">Dosis kedua cenderung naik, tapi belum pernah menyentuh 95%</h1>
-        <p class="lede">Satu dosis vaksin campak belum cukup. Perlindungan penuh butuh dua dosis, dan di situlah Indonesia tertinggal.</p>
       </div>
-      <div class="grid g-2">
-        <div class="card">
-          <h2>Dosis pertama jalan di tempat, dosis kedua naik pelan</h2>
-          <p class="sub">Cakupan imunisasi campak Indonesia (%), WUENIC revisi 2025. Garis putus-putus biru: garis tren regresi MCV2.</p>
-          <div class="legend" id="lg-cakupan"></div>
-          <div class="chart" id="c-cakupan"></div>
-          <div class="chips">
-            <span class="chip"><span class="t">REGRESI</span><b>MCV2 +2,1 poin/tahun</b>p = 0,033</span>
-            <span class="chip"><span class="t">MANN-KENDALL</span><b>MCV2 naik</b>p = 0,048</span>
-            <span class="chip"><span class="t">REGRESI</span><b>MCV1 tidak bertren</b>p = 0,48</span>
-          </div>
-          <details><summary>Lihat tabel data</summary><div class="table-wrap" id="tb-cakupan"></div></details>
-        </div>
-        <div class="card why">
-          <div class="photo"><img src="img/virus-campak.jpg" alt="Partikel virus campak berwarna di bawah mikroskop elektron" onerror="this.parentNode.classList.add('noimg')"></div>
-          <div class="body">
-            <h2>Mengapa harus dua dosis?</h2>
-            <div class="dose">
-              <div class="t-amber"><small>1 dosis</small><b>93%</b><small>efektif mencegah campak</small></div>
-              <div class="t-vaksin"><small>2 dosis</small><b>97%</b><small>efektif mencegah campak</small></div>
+      <div class="card">
+        <h2>Dosis pertama jalan di tempat, dosis kedua naik pelan</h2>
+        <p class="sub">Cakupan imunisasi campak Indonesia (%)</p>
+        <div class="legend" id="lg-cakupan"></div>
+        <div class="chart" id="c-cakupan"></div>
+        <p class="src">Sumber: WHO/UNICEF WUENIC revisi 2025, data 2016–2025.</p>
+        <details><summary>Lihat data dan uji statistik</summary>
+          <div class="grid g-2" style="margin-top:8px">
+            <div>
+              <p class="sub"><b>Data</b></p>
+              <div class="table-wrap" id="tb-cakupan"></div>
             </div>
-            <p class="src">Vaksinnya bekerja. Celahnya ada pada anak yang tidak kembali untuk dosis kedua. Sumber angka efektivitas: CDC, dikutip <a href="https://www.nbcchicago.com/news/local/how-effective-are-measles-vaccines-and-do-you-need-a-booster-what-to-know/3377590/?amp=1" target="_blank" rel="noopener">NBC Chicago</a>. Foto: CDC/C. S. Goldsmith, W. Bellini.</p>
+            <div>
+              <p class="sub"><b>Uji statistik</b></p>
+              <div class="table-wrap"><table><tr><th>Uji</th><th style="text-align:left; white-space:normal">Hasil</th><th>p</th></tr><tr><td>Regresi linear</td><td style="text-align:left; white-space:normal">MCV2 naik 2,1 poin per tahun</td><td>0,033</td></tr><tr><td>Mann-Kendall</td><td style="text-align:left; white-space:normal">MCV2 cenderung naik</td><td>0,048</td></tr><tr><td>Regresi linear</td><td style="text-align:left; white-space:normal">MCV1 tidak bertren</td><td>0,48</td></tr></table></div>
+            </div>
           </div>
+        </details>
+      </div>
+      <div class="card" style="flex-direction:row; flex-wrap:wrap; align-items:center; gap:12px 24px">
+        <div style="flex:1 1 280px">
+          <h2>Dua dosis melindungi paling baik</h2>
+          <p class="src" style="margin-top:6px">Vaksinnya bekerja, tapi belum semua anak mendapatkannya. Sumber: <a href="https://www.cdc.gov/measles/vaccines/index.html" target="_blank" rel="noopener">CDC</a>.</p>
+        </div>
+        <div class="dose" style="flex:1 1 280px">
+          <div style="background:var(--chip)"><small>1 dosis</small><b>93%</b><small>efektif</small></div>
+          <div class="t-vaksin"><small>2 dosis</small><b>97%</b><small>efektif</small></div>
         </div>
       </div>
       <div class="grid g-2e">
         <div class="card">
-          <h2>Pendapatan berkaitan kuat dengan cakupan, tapi bukan penghalang</h2>
-          <p class="sub">PDB per kapita (USD, skala log) vs cakupan MCV2, 11 negara ASEAN, 2025. Garis lengkung: cakupan yang diharapkan untuk tiap tingkat pendapatan.</p>
+          <h2>Pendapatan berkaitan kuat dengan cakupan, tapi Vietnam melampauinya</h2>
+          <p class="sub">PDB per kapita (skala log) vs cakupan MCV2, ASEAN 2025</p>
           <div class="chart" id="c-scatter"></div>
-          <div class="chips"><span class="chip"><span class="t">SPEARMAN</span><b>ρ = 0,87</b>p = 0,0005 · n = 11</span></div>
-          <details><summary>Lihat tabel data</summary><div class="table-wrap" id="tb-scatter"></div></details>
+          <p class="src">Korelasi, bukan sebab-akibat. Sumber: WHO/UNICEF WUENIC revisi 2025; World Bank WDI.</p>
         </div>
         <div class="card">
           <h2>Vietnam 18,7 poin di atas harapan; Indonesia hanya +1,7</h2>
-          <p class="sub">Selisih cakupan MCV2 aktual dengan cakupan yang diharapkan dari pendapatannya (poin), 2025.</p>
+          <p class="sub">Selisih MCV2 aktual dari harapan (poin), 2025</p>
           <div class="chart" id="c-resid"></div>
-          <p class="src">Indonesia berada di posisi yang wajar untuk pendapatannya. Yang luar biasa adalah Vietnam: pendapatan hampir sama (USD 5.066 vs 5.060), cakupan 95%.</p>
+          <p class="src">Pendapatan Vietnam dan Indonesia hampir sama: USD 5.066 vs 5.060. Sumber: WHO/UNICEF WUENIC revisi 2025; World Bank WDI; dihitung tim.</p>
         </div>
       </div>
-      <p class="src">Korelasi menunjukkan keterkaitan, bukan sebab-akibat. Sumber: WHO/UNICEF WUENIC revisi 2025; PDB per kapita dari asean_tahun.csv.</p>
+      <div class="card">
+        <details><summary>Lihat data dan uji statistik ASEAN</summary>
+          <div class="grid g-2" style="margin-top:8px">
+            <div>
+              <p class="sub"><b>Data 2025</b></p>
+              <div class="table-wrap" id="tb-scatter"></div>
+            </div>
+            <div>
+              <p class="sub"><b>Uji statistik</b></p>
+              <div class="table-wrap"><table><tr><th>Uji</th><th style="text-align:left; white-space:normal">Hasil</th><th>p</th></tr><tr><td>Spearman</td><td style="text-align:left; white-space:normal">PDB berkaitan kuat dengan MCV2 (korelasi 0,87; n = 11)</td><td>0,0005</td></tr><tr><td>Regresi log PDB</td><td style="text-align:left; white-space:normal">Dasar nilai harapan (R² = 0,64)</td><td>0,003</td></tr></table></div>
+              <p class="src" style="margin-top:8px">Nilai harapan Singapura di atas 100% hanya efek perpanjangan garis.</p>
+            </div>
+          </div>
+        </details>
+      </div>
       <nav class="pager" aria-label="Halaman"><a href="#gambaran">← Gambaran</a><a class="next" href="#provinsi">Lanjut: Provinsi →</a></nav>
     </section>
 
