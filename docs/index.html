@@ -59,6 +59,7 @@
     </div>
 
     <!-- ================= 1. GAMBARAN ================= -->
+    <!-- PEMILIK: Anggota A -->
     <section class="page" data-page="gambaran" aria-labelledby="h-gambaran">
       <div class="hero">
         <div class="hero-text">
@@ -111,6 +112,7 @@
     </section>
 
     <!-- ================= 2. CELAH ================= -->
+    <!-- PEMILIK: Anggota B -->
     <section class="page" data-page="celah" aria-labelledby="h-celah" hidden>
       <div class="head">
         <div class="eyebrow">Babak 2 · Masalah dan konteks</div>
@@ -162,6 +164,7 @@
     </section>
 
     <!-- ================= 3. PROVINSI ================= -->
+    <!-- PEMILIK: Anggota C -->
     <section class="page" data-page="provinsi" aria-labelledby="h-provinsi" hidden>
       <div class="head">
         <div class="eyebrow">Babak 3 · Penjelasan</div>
@@ -201,6 +204,7 @@
     </section>
 
     <!-- ================= 4. PROYEKSI ================= -->
+    <!-- PEMILIK: Anggota A -->
     <section class="page" data-page="proyeksi" aria-labelledby="h-proyeksi" hidden>
       <div class="head">
         <div class="eyebrow">Babak 4 · Klimaks dan aksi</div>
@@ -248,126 +252,10 @@
 
 <script src="data/data.js"></script>
 <script src="js/grafik.js"></script>
-<script>
-/* ---------- halaman 1 ---------- */
-const K = DATA.kemenkes.find(r => r.tahun === 2025);
-document.getElementById("k-konf").textContent = f0.format(K.terkonfirmasi);
-document.getElementById("k-susp").textContent = f0.format(K.suspek);
-document.getElementById("k-mati").textContent = f0.format(K.kematian);
-document.getElementById("k-klb").textContent = f0.format(K.jumlah_klb);
-let modeKasus = "inc";
-function drawKasus(){
-  const k = DATA.kasus, host = document.getElementById("c-kasus");
-  if (modeKasus === "inc"){
-    document.getElementById("s-kasus").textContent = "Kasus per 1 juta penduduk: Indonesia dibanding gabungan 11 negara ASEAN, 2016–2024.";
-    legend(document.getElementById("lg-kasus"), [{name:"Indonesia", color:"var(--kasus)"}, {name:"Gabungan ASEAN", color:"var(--konteks)"}]);
-    lineChart(host, {label:"Insidensi campak per 1 juta penduduk, Indonesia dan gabungan ASEAN, 2016 sampai 2024", x:k.tahun,
-      y:{min:0, max:120, ticks:[0,30,60,90,120], fmt:v => f0.format(v)}, tipFmt:v => f1.format(v),
-      shade:[{x0:2019.6, x1:2021.4, label:"Pandemi", pos:"top"}],
-      series:[{name:"Gabungan ASEAN", values:k.asean_inc, color:"var(--konteks)", end:true, endLabel:"ASEAN"},
-              {name:"Indonesia", values:k.idn_inc, color:"var(--kasus)", width:2.5, end:true, area:true}],
-      notes:[{x:2023, y:64.2, dy:-30, lines:["2023: 64,2 per 1 juta", "≈2× gabungan ASEAN"], anchor:"end"}]});
-  } else {
-    document.getElementById("s-kasus").textContent = "Jumlah kasus campak yang dilaporkan, Indonesia, 2016–2024.";
-    legend(document.getElementById("lg-kasus"), []);
-    lineChart(host, {label:"Jumlah kasus campak Indonesia, 2016 sampai 2024", x:k.tahun,
-      y:{min:0, max:20000, ticks:[0,5000,10000,15000,20000], fmt:v => v ? f0.format(v/1000) + " rb" : "0"}, tipFmt:v => f0.format(v),
-      shade:[{x0:2019.6, x1:2021.4, label:"Pandemi", pos:"top"}],
-      series:[{name:"Kasus Indonesia", values:k.idn_kasus, color:"var(--kasus)", width:2.5, end:true, endLabel:"6.328 (2024)", area:true}],
-      notes:[{x:2021, y:394, dy:-40, lines:["2021: 394 kasus"], anchor:"end"},
-             {x:2023, y:18063, dy:16, lines:["2023: 18.063", "46× lipat"], anchor:"end"}]});
-  }
-  table(document.getElementById("tb-kasus"), ["Tahun","Kasus Indonesia","Indonesia per 1 juta","Gabungan ASEAN per 1 juta"],
-    k.tahun.map((t,i) => [String(t), f0.format(k.idn_kasus[i]), f1.format(k.idn_inc[i]), f1.format(k.asean_inc[i])]));
-}
-function setMode(m){ modeKasus = m; document.getElementById("m-inc").setAttribute("aria-pressed", m==="inc"); document.getElementById("m-abs").setAttribute("aria-pressed", m==="abs"); drawKasus(); }
-document.getElementById("m-inc").addEventListener("click", () => setMode("inc"));
-document.getElementById("m-abs").addEventListener("click", () => setMode("abs"));
-
-/* ---------- halaman 2 ---------- */
-function drawCakupan(){
-  const c = DATA.cakupan;
-  legend(document.getElementById("lg-cakupan"), [{name:"Dosis 2 (MCV2)", color:"var(--vaksin)"}, {name:"Dosis 1 (MCV1)", color:"var(--konteks)"}, {name:"Tren MCV2", color:"var(--vaksin)", dash:true}]);
-  lineChart(document.getElementById("c-cakupan"), {label:"Cakupan dosis 1 dan dosis 2 campak Indonesia 2016 sampai 2025 dengan target 95 persen", x:c.tahun, height:300,
-    y:{min:40, max:100, ticks:[40,50,60,70,80,90,100], fmt:v => v + "%"}, tipFmt:v => f1.format(v) + "%",
-    refs:[{y:95, label:"Target 95% (kekebalan kelompok)"}], shade:[{x0:2019.6, x1:2021.4, label:"Pandemi", pos:"bottom"}],
-    series:[{name:"Dosis 1 (MCV1)", values:c.mcv1, color:"var(--konteks)", end:true, endLabel:"MCV1 85%"},
-            {name:"Tren MCV2", values:c.tren, color:"var(--vaksin)", width:1.5, dash:true},
-            {name:"Dosis 2 (MCV2)", values:c.mcv2, color:"var(--vaksin)", width:2.5, end:true, endLabel:"MCV2 78%", area:true}],
-    notes:[{x:2021, y:53, dy:30, lines:["2021: dosis 2 hanya 53%"], anchor:"start"}]});
-  table(document.getElementById("tb-cakupan"), ["Tahun","MCV1 (%)","MCV2 (%)","Tren MCV2 (%)"], c.tahun.map((t,i) => [String(t), f0.format(c.mcv1[i]), f0.format(c.mcv2[i]), f1.format(c.tren[i])]));
-  const pts = DATA.asean.map(p => ({...p, hl: p.negara==="Indonesia" || p.negara==="Vietnam",
-    color: p.negara==="Indonesia" ? "var(--kasus)" : p.negara==="Vietnam" ? "var(--vaksin)" : "var(--konteks)",
-    labelLeft: ["Indonesia","Singapura","Brunei","Thailand"].includes(p.negara), below: p.negara==="Timor-Leste", above: p.negara==="Vietnam"}));
-  scatter(document.getElementById("c-scatter"), {label:"Diagram sebar PDB per kapita terhadap cakupan MCV2, 11 negara ASEAN, 2025", points:pts, a:DATA.logfit.a, b:DATA.logfit.b});
-  table(document.getElementById("tb-scatter"), ["Negara","PDB per kapita (USD)","MCV2 (%)","Diharapkan (%)","Selisih (poin)"],
-    [...DATA.asean].sort((a,b) => b.residual - a.residual).map(p => [p.negara, f0.format(p.pdb), f0.format(p.mcv2), f1.format(p.harapan), (p.residual>0 ? "+" : p.residual<0 ? "\u2212" : "") + f1.format(Math.abs(p.residual))]));
-  const rows = [...DATA.asean].sort((a,b) => b.residual - a.residual).map(p => ({label:p.negara, value:p.residual, strong: p.negara==="Indonesia" || p.negara==="Vietnam",
-    color: p.negara==="Indonesia" ? "var(--kasus)" : p.negara==="Vietnam" ? "var(--vaksin)" : "var(--konteks)"}));
-  barChart(document.getElementById("c-resid"), {label:"Selisih cakupan MCV2 aktual dengan yang diharapkan per negara", rows, min:-15, minNarrow:-26, max:22, ticks:[-10,0,10,20], zero:true,
-    fmt:v => (v>0 ? "+" : v<0 ? "\u2212" : "") + f1.format(Math.abs(v)), fmtTick:v => (v>0 ? "+" : v<0 ? "\u2212" : "") + Math.abs(v), tipName:"poin dari harapan", rowH:24});
-}
-
-/* ---------- halaman 3 ---------- */
-let filterProv = "semua";
-const TERENDAH = ["Aceh","Papua Pegunungan","Sumatera Barat"];
-function drawProv(){
-  const rows = DATA.provinsi.map(p => ({label:p.nama, value:p.pct, strong: TERENDAH.includes(p.nama),
-    color: TERENDAH.includes(p.nama) ? "var(--kasus)" : p.kelompok==="Jawa-Bali" ? "var(--vaksin)" : "var(--konteks)",
-    dim: filterProv !== "semua" && p.kelompok !== filterProv, tipName:p.kelompok + " · " + p.wilayah}));
-  barChart(document.getElementById("c-prov"), {label:"Persentase balita pernah diimunisasi campak per provinsi 2025, diurutkan dari terendah", rows, min:0, max:100, ticks:[0,25,50,75,100],
-    fmt:v => f1.format(v) + "%", fmtTick:v => v + "%", rowH:20});
-  table(document.getElementById("tb-prov"), ["Provinsi","Wilayah","Kelompok uji","Pernah imunisasi campak (%)"], DATA.provinsi.map(p => [p.nama, p.wilayah, p.kelompok, f1.format(p.pct)]));
-}
-document.querySelectorAll("[data-f]").forEach(b => b.addEventListener("click", () => { filterProv = b.dataset.f;
-  document.querySelectorAll("[data-f]").forEach(x => x.setAttribute("aria-pressed", x === b)); drawProv(); }));
-
-/* ---------- halaman 4 ---------- */
-const START = 76.3, START_YEAR = 2025;
-function tahunCapai(target, laju){ return START_YEAR + (target - START) / laju; }
-function drawProy(){
-  const p = DATA.proyeksi, laju = parseFloat(document.getElementById("laju").value);
-  document.getElementById("laju-out").textContent = f1.format(laju);
-  document.getElementById("o90").textContent = "≈ " + Math.round(tahunCapai(90, laju));
-  document.getElementById("o95").textContent = "≈ " + Math.round(tahunCapai(95, laju));
-  document.getElementById("oneed").textContent = f1.format((90 - START) / (2030 - START_YEAR)) + " /thn";
-  const idx = p.tahun.map((t,i) => i).filter(i => p.tahun[i] <= 2036);
-  const xs = idx.map(i => p.tahun[i]);
-  const skenX = [], skenV = []; for (let t = 2025; t <= 2036; t++){ skenX.push(t); skenV.push(Math.min(100, START + laju*(t-2025))); }
-  const custom = Math.abs(laju - 2.1) > 0.05;
-  legend(document.getElementById("lg-proy"), [{name:"MCV2 aktual", color:"var(--vaksin)"}, {name:"Garis tren + pita 95%", color:"var(--konteks)", dash:true}].concat(custom ? [{name:"Skenario laju pilihan", color:"var(--skenario)", dash:true}] : []));
-  const series = [{name:"Garis tren", values:idx.map(i => p.tren[i]), color:"var(--konteks)", width:2, dash:true},
-                  {name:"MCV2 aktual", values:idx.map(i => p.aktual[i]), color:"var(--vaksin)", width:2.5, end:true, endLabel:""}];
-  if (custom) series.push({name:"Skenario", x:skenX, values:skenV, color:"var(--skenario)", width:1.5, dash:true});
-  lineChart(document.getElementById("c-proy"), {label:"Cakupan MCV2 Indonesia aktual dan proyeksi garis tren sampai 2036", x:xs, height:320, xStep:2, right:90,
-    y:{min:40, max:100, ticks:[40,50,60,70,80,90,100], fmt:v => v + "%"}, tipFmt:v => f1.format(v) + "%",
-    band:{x:xs, lo:idx.map(i => p.lo[i]), hi:idx.map(i => p.hi[i]), color:"var(--konteks)"},
-    refs:[{y:95, label:"95% kekebalan kelompok"}, {y:90, label:"90% target IA2030"}], xrefs:[{x:2030, label:"2030"}],
-    tipExtra:[{name:"pita 95%", x:xs, color:"var(--konteks)", fmt:j => f0.format(p.lo[idx[j]]) + "–" + f0.format(p.hi[idx[j]]) + "%"}],
-    series, notes:[{x:2032, y:90.8, dy:34, lines:["Tren ≈90% sekitar 2032"], anchor:"start"}]});
-  table(document.getElementById("tb-proy"), ["Tahun","Aktual (%)","Tren (%)","Batas bawah (%)","Batas atas (%)"],
-    idx.map(i => [String(p.tahun[i]), p.aktual[i]==null ? "–" : f0.format(p.aktual[i]), f1.format(p.tren[i]), f1.format(p.lo[i]), f1.format(p.hi[i])]));
-}
-document.getElementById("laju").addEventListener("input", drawProy);
-
-/* ---------- routing ---------- */
-const PAGES = ["gambaran","celah","provinsi","proyeksi"];
-const DRAW = {gambaran:drawKasus, celah:drawCakupan, provinsi:drawProv, proyeksi:drawProy};
-let current = null;
-function route(){
-  const h = location.hash.replace("#",""); const page = PAGES.includes(h) ? h : "gambaran";
-  document.querySelectorAll("[data-page]").forEach(s => s.hidden = s.dataset.page !== page);
-  document.querySelectorAll("[data-nav]").forEach(a => a.dataset.nav === page ? a.setAttribute("aria-current","page") : a.removeAttribute("aria-current"));
-  if (current !== null && current !== page) window.scrollTo(0,0);
-  current = page; DRAW[page]();
-  const cur = document.querySelector(`[data-nav="${page}"] b`); if (cur) document.getElementById("crumb-page").textContent = cur.textContent;
-}
-window.addEventListener("hashchange", route);
-let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => DRAW[current](), 120); });
-document.getElementById("themeBtn").addEventListener("click", () => {
-  const root = document.documentElement; const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-  root.dataset.theme = dark ? "light" : "dark"; });
-route();
-</script>
+<script src="js/halaman-1-gambaran.js"></script>
+<script src="js/halaman-2-celah.js"></script>
+<script src="js/halaman-3-provinsi.js"></script>
+<script src="js/halaman-4-proyeksi.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
