@@ -93,7 +93,7 @@ a25[["iso3", "negara", "pdb_per_kapita_usd", "mcv2_wuenic", "mcv2_diharapkan", "
 
 # ---------- 3. Uji beda antarwilayah provinsi ----------
 prov = pd.read_csv(PROV, dtype={"kode_prov": str})
-pulau = {"1": "Sumatera", "3": "Jawa", "5": "Bali-Nusa Tenggara", "6": "Kalimantan",
+pulau = {"1": "Sumatera", "2": "Sumatera", "3": "Jawa", "5": "Bali-Nusa Tenggara", "6": "Kalimantan",
          "7": "Sulawesi", "8": "Maluku", "9": "Papua"}
 prov["wilayah"] = prov["kode_prov"].str[0].map(pulau)
 jawa_bali = (prov["wilayah"] == "Jawa") | (prov["provinsi"] == "Bali")
