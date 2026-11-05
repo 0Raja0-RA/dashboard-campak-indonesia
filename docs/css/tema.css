@@ -1,145 +1,133 @@
-/* tema.css — semua gaya bersama dashboard (dipindah utuh dari <style> di index.html) */
+/* tema.css — semua gaya bersama dashboard. PEMILIK: Anggota A.
+   Nuansa informasi kesehatan: latar putih-mint, hijau-teal medis = perlindungan (vaksin),
+   merah klinis = kasus, abu kehijauan = pembanding. Hanya tema terang. Huruf: Plus Jakarta Sans.
+   Di layar lebar (>= 1100 x 580) tiap halaman muat satu layar; di layar kecil halaman di-scroll biasa. */
 html,body{margin:0}
 [hidden]{display:none!important}
 img{max-width:100%}
-/* Layout: sidebar putih + panggung berwarna langit pagi; tiap babak dibuka banner/kepala, kartu putih melayang di atasnya.
-   Biru = perlindungan (vaksin), oranye = kasus, abu kebiruan = pembanding. Display: Bricolage Grotesque; teks: Plus Jakarta Sans (dirancang untuk kota Jakarta). */
+.photo img{display:block}
 :root{
-  --bg:#EAF2FB; --bg-top:#DCEAF8; --surface:#FFFFFF; --surface-2:#F5F9FD; --line:#DCE6F2; --grid:#E6EDF6;
-  --ink:#10203A; --ink-2:#36486A; --muted:#566785;
-  --kasus:#C2410C; --vaksin:#2E6DA4; --konteks:#A7B3C5; --skenario:#10203A;
-  --hero-a:#0D3766; --hero-b:#16708A; --on-hero:#FFFFFF; --on-hero-2:#D4E6F5;
-  --tint-vaksin:#E3EEFA; --tint-kasus:#FDEBE2; --tint-amber:#FFF2D6; --tint-rose:#FCE6EB; --tint-violet:#ECE8FB; --tint-teal:#DFF3EF;
-  --ic-amber:#A86A00; --ic-rose:#B42F50; --ic-violet:#5F45B0; --ic-teal:#0F766E;
-  --chip:#EDF3FA; --shadow:0 1px 2px rgba(16,32,58,.06), 0 10px 28px rgba(16,32,58,.07);
-  --font-display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  color-scheme:light;
+  --bg:#F1F7F6; --bg-top:#E1F0EC; --surface:#FFFFFF; --surface-2:#F5FAF9; --line:#D8E6E2; --grid:#E4EEEB;
+  --ink:#0F2B2A; --ink-2:#2F4D4B; --muted:#5A716F;
+  --kasus:#C0392B; --vaksin:#0E7C74; --konteks:#A8B9B6; --skenario:#0F2B2A;
+  --hero-a:#0A4D49; --hero-b:#0F8077; --on-hero:#FFFFFF; --on-hero-2:#CDEDE7;
+  --tint-vaksin:#E0F2EE; --tint-kasus:#FCE9E6; --tint-amber:#FFF3D9; --tint-rose:#FBE7EC; --tint-violet:#ECEBFA; --tint-teal:#DDF3EE;
+  --ic-amber:#9A6200; --ic-rose:#B42F50; --ic-violet:#5B48A8; --ic-teal:#0F766E;
+  --chip:#EAF3F1; --shadow:0 1px 2px rgba(15,43,42,.05), 0 6px 18px rgba(15,43,42,.06);
+  --font-display:"Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
   --font-body:"Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0A1322; --bg-top:#0E1D35; --surface:#122039; --surface-2:#172843; --line:#22345420; --grid:#1D2D4A;
-    --ink:#EAF1FA; --ink-2:#C0CDE0; --muted:#95A6C0;
-    --kasus:#E46A35; --vaksin:#4A8FD0; --konteks:#5B6A84; --skenario:#EAF1FA;
-    --hero-a:#0B2C52; --hero-b:#0F5568; --on-hero:#FFFFFF; --on-hero-2:#C9DDF0;
-    --tint-vaksin:#173252; --tint-kasus:#3B2117; --tint-amber:#33290F; --tint-rose:#3A1B27; --tint-violet:#271F48; --tint-teal:#0F332F;
-    --ic-amber:#F2B84B; --ic-rose:#F07A97; --ic-violet:#A995F2; --ic-teal:#4FD1BD;
-    --chip:#1A2A47; --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.25); color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0A1322; --bg-top:#0E1D35; --surface:#122039; --surface-2:#172843; --line:#22345420; --grid:#1D2D4A;
-  --ink:#EAF1FA; --ink-2:#C0CDE0; --muted:#95A6C0;
-  --kasus:#E46A35; --vaksin:#4A8FD0; --konteks:#5B6A84; --skenario:#EAF1FA;
-  --hero-a:#0B2C52; --hero-b:#0F5568; --on-hero:#FFFFFF; --on-hero-2:#C9DDF0;
-  --tint-vaksin:#173252; --tint-kasus:#3B2117; --tint-amber:#33290F; --tint-rose:#3A1B27; --tint-violet:#271F48; --tint-teal:#0F332F;
-  --ic-amber:#F2B84B; --ic-rose:#F07A97; --ic-violet:#A995F2; --ic-teal:#4FD1BD;
-  --chip:#1A2A47; --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.25); color-scheme:dark;
+  /* garis detak jantung (EKG) untuk latar hero dan banner penutup */
+  --ekg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='80' viewBox='0 0 240 80'%3E%3Cpath d='M0 40h70l8-14 10 34 12-52 10 46 7-14h123' fill='none' stroke='%23FFFFFF' stroke-opacity='.16' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 *{box-sizing:border-box}
-body{background:var(--bg); background-image:linear-gradient(180deg, var(--bg-top) 0, var(--bg) 520px); background-repeat:no-repeat;
+body{background:var(--bg); background-image:linear-gradient(180deg, var(--bg-top) 0, var(--bg) 420px); background-repeat:no-repeat;
   color:var(--ink); font-family:var(--font-body); font-size:15px; line-height:1.55}
 a{color:var(--vaksin)}
 :focus-visible{outline:2px solid var(--vaksin); outline-offset:2px}
-.app{display:grid; grid-template-columns:256px minmax(0,1fr); min-height:100vh;
+.app{display:grid; grid-template-columns:248px minmax(0,1fr); min-height:100vh;
   padding-left:env(safe-area-inset-left,0px); padding-right:env(safe-area-inset-right,0px)}
 .ic{width:20px; height:20px; flex:none; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
 
 /* ---------- sidebar ---------- */
 .side{position:sticky; top:env(safe-area-inset-top,0px); align-self:start; height:100vh; overflow-y:auto; display:flex; flex-direction:column; gap:8px;
-  padding:22px 16px; background:var(--surface); border-right:1px solid var(--line)}
-.brand{display:flex; gap:12px; align-items:center; padding:2px 8px 18px}
-.brand b{display:block; font-family:var(--font-display); font-size:18px; font-weight:800; letter-spacing:-0.01em; line-height:1.1}
-.brand span{display:block; font-size:12px; color:var(--muted)}
+  padding:20px 14px; background:var(--surface); border-right:1px solid var(--line)}
+.brand{display:flex; gap:12px; align-items:center; padding:2px 8px 16px; border-bottom:1px solid var(--grid); margin-bottom:6px}
+.brand svg{flex:none}
+.brand b{display:block; font-family:var(--font-display); font-size:16px; font-weight:800; letter-spacing:-0.01em; line-height:1.15}
+.brand span{display:block; font-size:11.5px; color:var(--muted); line-height:1.35; margin-top:2px}
 .side-label{font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); padding:6px 12px 2px}
 .nav{display:flex; flex-direction:column; gap:4px}
-.nav a{display:grid; grid-template-columns:36px 1fr; gap:10px; align-items:center; min-height:52px; padding:8px 10px; border-radius:12px;
+.nav a{display:grid; grid-template-columns:34px 1fr; gap:10px; align-items:center; min-height:50px; padding:8px 10px; border-radius:12px;
   color:var(--ink-2); text-decoration:none; transition:background .15s}
 .nav a:hover{background:var(--surface-2)}
-.nav .navic{width:36px; height:36px; border-radius:10px; display:grid; place-items:center; background:var(--chip); color:var(--ink-2)}
+.nav .navic{width:34px; height:34px; border-radius:10px; display:grid; place-items:center; background:var(--chip); color:var(--vaksin)}
 .nav a b{display:block; font-size:14px; font-weight:700; line-height:1.25}
 .nav a small{display:block; font-size:12px; color:var(--muted)}
-.nav a[aria-current="page"]{background:var(--tint-vaksin); color:var(--ink)}
+.nav a[aria-current="page"]{background:var(--tint-vaksin); color:var(--ink); box-shadow:inset 3px 0 0 var(--vaksin)}
 .nav a[aria-current="page"] .navic{background:var(--vaksin); color:#FFFFFF}
-.side-card{margin-top:auto; position:relative; border-radius:16px; overflow:hidden; min-height:190px; display:flex; align-items:flex-end;
+.side-card{margin-top:auto; position:relative; border-radius:14px; overflow:hidden; min-height:170px; display:flex; align-items:flex-end;
   background:linear-gradient(160deg, var(--hero-a), var(--hero-b))}
 .side-card .photo{position:absolute; inset:0}
-.side-card .photo img{width:100%; height:100%; object-fit:cover; opacity:.55}
-.side-card p{position:relative; margin:0; padding:16px; color:var(--on-hero); font-family:var(--font-display); font-size:18px; font-weight:800; line-height:1.2}
+.side-card .photo img{width:100%; height:100%; object-fit:cover; opacity:.5}
+.side-card p{position:relative; margin:0; padding:14px; color:var(--on-hero); font-family:var(--font-display); font-size:16px; font-weight:800; line-height:1.25}
 .side-card p small{display:block; margin-top:6px; font-family:var(--font-body); font-size:11px; font-weight:500; color:var(--on-hero-2)}
-.side-foot{font-size:12px; color:var(--muted); padding:4px 10px 0; line-height:1.45}
+.side-foot{font-size:11.5px; color:var(--muted); padding:4px 10px 0; line-height:1.45}
 
 /* ---------- main ---------- */
-main{min-width:0; padding:20px max(16px, env(safe-area-inset-right,0px)) 40px 28px; display:flex; flex-direction:column; gap:18px}
-.topbar{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; max-width:1200px}
+main{min-width:0; padding:18px max(16px, env(safe-area-inset-right,0px)) 36px 24px; display:flex; flex-direction:column; gap:16px}
+.topbar{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px}
 .crumb{font-size:13px; color:var(--muted)}
 .crumb b{color:var(--ink); font-weight:700}
 .pills{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
-.pill{display:inline-flex; align-items:center; gap:6px; min-height:36px; padding:0 12px; border-radius:999px; background:var(--surface); box-shadow:var(--shadow); font-size:13px; color:var(--ink-2)}
-.iconbtn{width:40px; height:40px; border:0; border-radius:999px; background:var(--surface); box-shadow:var(--shadow); color:var(--ink-2); display:grid; place-items:center; cursor:pointer}
-.page{display:flex; flex-direction:column; gap:18px; max-width:1200px; width:100%}
-.eyebrow{font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--vaksin)}
-h1{margin:0; font-family:var(--font-display); font-size:clamp(28px, 3.2vw, 40px); line-height:1.08; font-weight:800; letter-spacing:-0.02em; text-wrap:balance; max-width:24ch}
-.lede{margin:0; color:var(--ink-2); max-width:66ch; font-size:16px}
-.head{display:flex; flex-direction:column; gap:8px; padding:6px 0 2px}
+.pill{display:inline-flex; align-items:center; gap:6px; min-height:32px; padding:0 12px; border-radius:999px; background:var(--surface); border:1px solid var(--line); font-size:12.5px; color:var(--ink-2)}
+.pill .ic{color:var(--vaksin)}
+.page{display:flex; flex-direction:column; gap:16px; width:100%}
+/* label babak: pil hijau dengan tanda palang medis kecil */
+.eyebrow{align-self:flex-start; display:inline-flex; align-items:center; gap:7px; padding:3px 11px 3px 9px; border-radius:999px;
+  background:var(--tint-vaksin); font-size:11.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--vaksin)}
+.eyebrow::before{content:""; width:9px; height:9px; flex:none;
+  background:linear-gradient(currentColor,currentColor) center/3px 100% no-repeat, linear-gradient(currentColor,currentColor) center/100% 3px no-repeat}
+h1{margin:0; font-family:var(--font-display); font-size:clamp(26px, 2.8vw, 36px); line-height:1.12; font-weight:800; letter-spacing:-0.02em; text-wrap:balance; max-width:30ch}
+.lede{margin:0; color:var(--ink-2); max-width:72ch; font-size:15px}
+.head{display:flex; flex-direction:column; gap:8px; padding:2px 0}
 
 /* hero */
-.hero{position:relative; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); border-radius:22px; overflow:hidden;
-  background:linear-gradient(120deg, var(--hero-a) 0%, var(--hero-b) 100%); color:var(--on-hero); box-shadow:var(--shadow)}
-.hero::before{content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:radial-gradient(circle at 12% 18%, rgba(255,255,255,.10) 0 2px, transparent 3px), radial-gradient(circle at 70% 80%, rgba(255,255,255,.08) 0 2px, transparent 3px);
-  background-size:38px 38px, 54px 54px}
-.hero-text{position:relative; padding:30px 32px; display:flex; flex-direction:column; gap:12px; justify-content:center}
-.hero .eyebrow{color:var(--on-hero-2)}
+/* overflow:clip (bukan hidden) agar grid tetap menghormati tinggi isinya dan hero tidak bisa menyusut sampai terpotong */
+.hero{position:relative; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); border-radius:18px; overflow:hidden; overflow:clip;
+  background:var(--ekg) left 62% / 240px 80px repeat-x, linear-gradient(120deg, var(--hero-a) 0%, var(--hero-b) 100%); color:var(--on-hero); box-shadow:var(--shadow)}
+.hero-text{position:relative; padding:28px 30px; display:flex; flex-direction:column; gap:12px; justify-content:center}
+.hero .eyebrow{background:rgba(255,255,255,.14); color:var(--on-hero)}
 .hero h1{color:var(--on-hero)}
-.hero .q{margin:0; color:var(--on-hero-2); font-size:16px}
-.hero .idea{margin:6px 0 0; padding:14px 16px; border-radius:14px; background:rgba(255,255,255,.12); font-weight:600; line-height:1.5}
+.hero .q{margin:0; color:var(--on-hero-2); font-size:15px}
+.hero .idea{margin:4px 0 0; padding:12px 14px; border-radius:12px; background:rgba(255,255,255,.12); border-left:3px solid var(--on-hero-2); font-weight:600; line-height:1.5; font-size:14px}
 .hero .idea span{display:block; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--on-hero-2); margin-bottom:4px}
-.hero-photo{position:relative; min-height:300px}
+.hero-photo{position:relative; min-height:280px}
 .hero-photo .photo{position:absolute; inset:0}
 .hero-photo .photo img{width:100%; height:100%; object-fit:cover; -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 28%); mask-image:linear-gradient(90deg, transparent 0, #000 28%)}
-.hero-photo figcaption{position:absolute; right:12px; bottom:10px; max-width:80%; padding:4px 10px; border-radius:8px; background:rgba(8,20,40,.55); color:#FFFFFF; font-size:11px}
+.hero-photo figcaption{position:absolute; right:12px; bottom:10px; max-width:80%; padding:4px 10px; border-radius:8px; background:rgba(6,32,30,.6); color:#FFFFFF; font-size:11px}
 
 /* photo fallback (gambar belum tersedia) */
 .photo{background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.22) 0 14%, transparent 15%), radial-gradient(circle at 72% 58%, rgba(255,255,255,.16) 0 9%, transparent 10%), linear-gradient(140deg, var(--hero-a), var(--hero-b))}
 .photo.noimg img{display:none}
 
 /* cards */
-.grid{display:grid; gap:16px}
+.grid{display:grid; gap:14px}
 .g-kpi{grid-template-columns:repeat(4, minmax(0,1fr))}
 .g-2{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr)}
 .g-2e{grid-template-columns:repeat(2, minmax(0,1fr))}
-.card{background:var(--surface); border-radius:18px; box-shadow:var(--shadow); padding:18px 20px; display:flex; flex-direction:column; gap:10px; min-width:0}
-.card h2{margin:0; font-family:var(--font-display); font-size:19px; font-weight:800; line-height:1.2; letter-spacing:-0.01em; text-wrap:balance}
-.card .sub{margin:0; font-size:13px; color:var(--muted)}
-.kpi{flex-direction:row; align-items:flex-start; gap:14px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:16px 18px; display:flex; flex-direction:column; gap:9px; min-width:0}
+.card h2{margin:0; font-family:var(--font-display); font-size:17px; font-weight:800; line-height:1.25; letter-spacing:-0.01em; text-wrap:balance}
+.card .sub{margin:0; font-size:12.5px; color:var(--muted)}
+.kpi{flex-direction:row; align-items:center; gap:14px}
 .kpi .kic{width:44px; height:44px; border-radius:12px; display:grid; place-items:center; flex:none}
 .kpi .kic .ic{width:22px; height:22px}
-.kpi .label{font-size:13px; color:var(--muted); font-weight:500}
-.kpi .value{display:block; font-family:var(--font-display); font-size:32px; font-weight:800; letter-spacing:-0.02em; line-height:1.1; margin:2px 0}
+.kpi .label{font-size:12.5px; color:var(--muted); font-weight:600}
+.kpi .value{display:block; font-family:var(--font-display); font-size:30px; font-weight:800; letter-spacing:-0.02em; line-height:1.1; margin:2px 0; font-variant-numeric:tabular-nums}
 .kpi .foot{font-size:12px; color:var(--muted)}
 .t-kasus{background:var(--tint-kasus); color:var(--kasus)} .t-amber{background:var(--tint-amber); color:var(--ic-amber)}
 .t-rose{background:var(--tint-rose); color:var(--ic-rose)} .t-violet{background:var(--tint-violet); color:var(--ic-violet)}
 .t-vaksin{background:var(--tint-vaksin); color:var(--vaksin)} .t-teal{background:var(--tint-teal); color:var(--ic-teal)}
-.src{font-size:12px; color:var(--muted); margin:0}
+.src{font-size:11.5px; color:var(--muted); margin:0}
 .chips{display:flex; flex-wrap:wrap; gap:8px}
-.chip{display:inline-flex; gap:6px; align-items:baseline; background:var(--chip); border-radius:999px; padding:5px 12px; font-size:13px; color:var(--ink-2)}
+.chip{display:inline-flex; gap:6px; align-items:baseline; background:var(--chip); border-radius:999px; padding:4px 12px; font-size:12.5px; color:var(--ink-2)}
 .chip b{color:var(--ink); font-weight:700}
 .chip .t{font-size:10.5px; font-weight:700; letter-spacing:0.1em; color:var(--vaksin)}
-.steps{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:14px}
+.steps{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px}
 .steps li{display:grid; grid-template-columns:28px 1fr; gap:10px}
 .steps .n{width:28px; height:28px; border-radius:9px; display:grid; place-items:center; font-size:13px; font-weight:700}
 .steps b{display:block; font-size:14px}
-.steps span{font-size:14px; color:var(--ink-2)}
-.face{display:grid; grid-template-columns:88px 1fr; gap:12px; align-items:center; margin-top:auto; padding-top:12px; border-top:1px solid var(--grid)}
-.face .photo{width:88px; height:88px; border-radius:14px; overflow:hidden}
+.steps span{font-size:13.5px; color:var(--ink-2)}
+.face{display:grid; grid-template-columns:80px 1fr; gap:12px; align-items:center; margin-top:auto; padding-top:12px; border-top:1px solid var(--grid)}
+.face .photo{width:80px; height:80px; border-radius:12px; overflow:hidden}
 .face .photo img{width:100%; height:100%; object-fit:cover}
 .face p{margin:0; font-size:12px; color:var(--muted)}
 .face p b{display:block; color:var(--ink); font-size:13px}
-.seg{display:inline-flex; background:var(--chip); border-radius:12px; padding:4px; gap:2px; flex-wrap:wrap}
-.seg button{min-height:34px; padding:0 14px; border:0; border-radius:9px; background:transparent; color:var(--ink-2); font:inherit; font-size:13px; font-weight:600; cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--surface); color:var(--vaksin); box-shadow:0 1px 3px rgba(16,32,58,.12)}
+.seg{display:inline-flex; background:var(--chip); border-radius:11px; padding:3px; gap:2px; flex-wrap:wrap}
+.seg button{min-height:32px; padding:0 13px; border:0; border-radius:8px; background:transparent; color:var(--ink-2); font:inherit; font-size:12.5px; font-weight:600; cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface); color:var(--vaksin); box-shadow:0 1px 3px rgba(15,43,42,.14)}
 .toolbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between}
-.legend{display:flex; flex-wrap:wrap; gap:14px; font-size:13px; color:var(--ink-2)}
+.legend{display:flex; flex-wrap:wrap; gap:14px; font-size:12.5px; color:var(--ink-2)}
 .legend span{display:inline-flex; align-items:center; gap:6px}
 .key{display:inline-block; width:16px; height:0; border-top:2.5px solid; border-radius:2px}
 .key.dash{border-top-style:dashed}
@@ -154,50 +142,193 @@ h1{margin:0; font-family:var(--font-display); font-size:clamp(28px, 3.2vw, 40px)
 .chart text.note{fill:var(--ink-2); font-size:12px}
 .chart .ref{stroke:var(--ink-2); stroke-width:1.25; stroke-dasharray:5 4}
 .chart .cross{stroke:var(--ink-2); stroke-width:1}
-.tip{position:absolute; pointer-events:none; background:var(--surface); border-radius:10px; padding:9px 11px; box-shadow:0 8px 24px rgba(16,32,58,.18);
+.tip{position:absolute; pointer-events:none; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:9px 11px; box-shadow:0 8px 24px rgba(15,43,42,.16);
   font-size:12px; color:var(--ink-2); min-width:150px; z-index:5}
 .tip .h{font-weight:700; color:var(--ink); margin-bottom:4px}
 .tip .r{display:grid; grid-template-columns:16px auto 1fr; gap:6px; align-items:center}
 .tip .r strong{color:var(--ink); font-size:13px}
 details{font-size:13px; color:var(--ink-2)}
-summary{cursor:pointer; color:var(--vaksin); font-weight:600; min-height:28px}
+summary{cursor:pointer; color:var(--vaksin); font-weight:600; min-height:24px}
 .table-wrap{overflow-x:auto; margin-top:8px}
 table{border-collapse:collapse; font-size:13px; font-variant-numeric:tabular-nums; min-width:100%}
 th,td{padding:7px 10px; border-bottom:1px solid var(--grid); text-align:right; white-space:nowrap}
 th:first-child,td:first-child{text-align:left}
-th{color:var(--muted); font-weight:600}
+th{color:var(--muted); font-weight:600; background:var(--surface-2)}
 .why{position:relative; overflow:hidden; padding:0}
 .why .photo{flex:1; min-height:160px}
 .why .photo img{width:100%; height:100%; object-fit:cover}
 .why .body{padding:16px 20px 18px; display:flex; flex-direction:column; gap:10px}
 .dose{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
 .dose div{border-radius:12px; padding:10px 12px}
-.dose b{display:block; font-family:var(--font-display); font-size:28px; font-weight:800; line-height:1.1}
+.dose b{display:block; font-family:var(--font-display); font-size:26px; font-weight:800; line-height:1.1}
 .dose small{font-size:12px}
-.note-box{display:flex; gap:12px; align-items:flex-start; font-size:13px; color:var(--ink-2); background:var(--surface); border-radius:16px; box-shadow:var(--shadow); padding:14px 18px}
+.note-box{display:flex; gap:12px; align-items:flex-start; font-size:12.5px; color:var(--ink-2); background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--vaksin); border-radius:14px; box-shadow:var(--shadow); padding:12px 16px}
 .note-box b{color:var(--ink)}
-.calc{display:flex; flex-direction:column; gap:12px}
+.calc{display:flex; flex-direction:column; gap:11px}
 .calc label{font-size:14px; font-weight:700}
 .calc input[type=range]{width:100%; accent-color:var(--vaksin)}
 .calc .out{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
-.calc .out div{background:var(--surface-2); border-radius:12px; padding:10px 12px}
+.calc .out div{background:var(--surface-2); border:1px solid var(--grid); border-radius:12px; padding:10px 12px}
 .calc .out small{display:block; font-size:12px; color:var(--muted)}
-.calc .out b{font-family:var(--font-display); font-size:24px; font-weight:800}
-.rec{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px}
-.rec .card p{margin:0; font-size:14px; color:var(--ink-2)}
+.calc .out b{font-family:var(--font-display); font-size:22px; font-weight:800; color:var(--vaksin)}
+.rec{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px}
+.rec .card{border-top:3px solid var(--vaksin)}
+.rec .card p{margin:0; font-size:13.5px; color:var(--ink-2)}
 .rec .top{display:flex; align-items:center; gap:10px}
-.rec .top .kic{width:40px; height:40px; border-radius:12px; display:grid; place-items:center}
+.rec .top .kic{width:36px; height:36px; border-radius:10px; display:grid; place-items:center}
 .rec .top small{font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
 .rec .todo{outline:2px dashed var(--konteks); outline-offset:-6px}
-.closing{position:relative; overflow:hidden; border-radius:22px; min-height:170px; display:flex; align-items:center;
-  background:linear-gradient(120deg, var(--hero-a), var(--hero-b)); box-shadow:var(--shadow)}
+.closing{position:relative; overflow:hidden; overflow:clip; border-radius:18px; min-height:160px; display:flex; align-items:center;
+  background:var(--ekg) left 70% / 240px 80px repeat-x, linear-gradient(120deg, var(--hero-a), var(--hero-b)); box-shadow:var(--shadow)}
 .closing .photo{position:absolute; inset:0 0 0 45%}
 .closing .photo img{width:100%; height:100%; object-fit:cover; opacity:.5; -webkit-mask-image:linear-gradient(90deg, transparent, #000 40%); mask-image:linear-gradient(90deg, transparent, #000 40%)}
-.closing p{position:relative; margin:0; padding:26px 30px; max-width:30ch; color:var(--on-hero); font-family:var(--font-display); font-size:clamp(22px,2.4vw,30px); font-weight:800; line-height:1.15; text-wrap:balance}
+.closing p{position:relative; margin:0; padding:24px 28px; max-width:30ch; color:var(--on-hero); font-family:var(--font-display); font-size:clamp(20px,2.2vw,28px); font-weight:800; line-height:1.2; text-wrap:balance}
 .pager{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
-.pager a{display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 18px; border-radius:999px; background:var(--surface); box-shadow:var(--shadow); color:var(--ink); text-decoration:none; font-size:14px; font-weight:700}
-.pager a.next{background:var(--vaksin); color:#FFFFFF}
-.credits{font-size:11.5px; color:var(--muted); max-width:1200px; line-height:1.5}
+.pager a{display:inline-flex; align-items:center; gap:8px; min-height:40px; padding:0 16px; border-radius:999px; background:var(--surface); border:1px solid var(--line); color:var(--ink); text-decoration:none; font-size:13.5px; font-weight:700}
+.pager a.next{background:var(--vaksin); border-color:var(--vaksin); color:#FFFFFF}
+.credits{font-size:10.5px; color:var(--muted); line-height:1.45; margin:0; padding:0 10px}
+
+/* ---------- mode satu layar (layar lebar) ---------- */
+@media (min-width: 1100px) and (min-height: 580px){
+  .app{height:100vh}
+  main{height:100vh; overflow:auto; padding:12px 20px 12px 20px; gap:10px}
+  .page{flex:1 1 auto; min-height:0; display:grid; gap:12px; position:relative}
+  .page > *{min-width:0; min-height:0}
+  .page .grid{min-height:0}
+  .page > .g-2, .page > .g-2e{grid-template-rows:minmax(0,1fr)}  /* kartu mengikuti ruang, bukan panjang isinya */
+  .page .card{min-height:0}
+  /* grafik mengisi sisa tinggi kartunya (lihat tinggiGrafik di grafik.js) */
+  .page .chart{flex:1 1 0; min-height:120px}
+  #c-peta > svg{height:100%!important}
+  h1{font-size:clamp(22px, 1.75vw, 30px); max-width:40ch}
+  .lede{font-size:13.5px}
+  .head{gap:6px}
+  .card{padding:12px 16px; gap:7px}
+  .card h2{font-size:15.5px}
+  .kpi{padding:10px 14px; gap:12px}
+  .kpi .kic{width:38px; height:38px}
+  .kpi .value{font-size:24px}
+  .pager a{min-height:34px; font-size:13px}
+  /* tabel data dibuka sebagai panel di atas halaman, bukan memanjangkan halaman */
+  details[open]{position:absolute; inset:0; z-index:20; overflow:auto; padding:16px 20px;
+    background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:0 12px 40px rgba(15,43,42,.18)}
+  details[open] > summary{position:sticky; top:-16px; background:var(--surface); padding:4px 0 8px}
+  details[open] > summary::after{content:"  ·  klik untuk menutup"; color:var(--muted); font-weight:500}
+
+  /* Halaman 1: hero + KPI di atas, grafik kasus + penjelasan di bawah */
+  [data-page="gambaran"]{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); grid-template-rows:auto auto minmax(0,1fr) auto;
+    grid-template-areas:"hero kpi" "src src" "isi isi" "pager pager"}
+  [data-page="gambaran"] > .hero{grid-area:hero}
+  [data-page="gambaran"] > .g-kpi{grid-area:kpi; grid-template-columns:repeat(2,minmax(0,1fr))}
+  [data-page="gambaran"] > .src{grid-area:src}
+  [data-page="gambaran"] > .g-2{grid-area:isi}
+  [data-page="gambaran"] > .pager{grid-area:pager}
+  .hero-text{padding:18px 24px; gap:8px}
+  .hero .q{font-size:13.5px}
+  .hero .idea{padding:9px 12px; font-size:13px; line-height:1.45}
+  .hero-photo{min-height:0}
+  .steps{gap:9px}
+  .steps span{font-size:13px}
+  .face{padding-top:8px; grid-template-columns:64px 1fr}
+  .face .photo{width:64px; height:64px}
+
+  /* Halaman 2: judul + kartu dua dosis di atas, tiga grafik berdampingan */
+  [data-page="celah"]{grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:auto minmax(0,1fr) auto auto;
+    grid-template-areas:"head head dosis" "cak pair pair" "detail detail detail" "pager pager pager"}
+  [data-page="celah"] > .head{grid-area:head; justify-content:center}
+  [data-page="celah"] > .l-dosis{grid-area:dosis; padding:10px 14px}
+  [data-page="celah"] > .l-cakupan{grid-area:cak}
+  [data-page="celah"] > .g-2e{grid-area:pair}
+  [data-page="celah"] > .l-detail{grid-area:detail; padding:8px 16px}
+  [data-page="celah"] > .pager{grid-area:pager}
+  .dose b{font-size:22px}
+
+  /* Halaman 3: judul + KPI di atas, peta + 10 terendah di tengah, tabel + catatan di bawah */
+  [data-page="provinsi"]{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); grid-template-rows:auto minmax(0,1fr) auto auto;
+    grid-template-areas:"head kpi" "isi isi" "detail note" "pager pager"}
+  [data-page="provinsi"] > .head{grid-area:head; justify-content:center}
+  [data-page="provinsi"] > .g-kpi{grid-area:kpi}
+  [data-page="provinsi"] > .g-2e{grid-area:isi}
+  [data-page="provinsi"] > .card{grid-area:detail; padding:8px 16px; justify-content:center}
+  [data-page="provinsi"] > .note-box{grid-area:note; padding:8px 14px; font-size:12px}
+  [data-page="provinsi"] > .pager{grid-area:pager}
+
+  /* Halaman 4: proyeksi + kalkulator, lalu rekomendasi + banner penutup */
+  [data-page="proyeksi"]{grid-template-columns:minmax(0,2.3fr) minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto auto auto;
+    grid-template-areas:"head head" "isi isi" "rec close" "src src" "pager pager"}
+  [data-page="proyeksi"] > .head{grid-area:head}
+  [data-page="proyeksi"] > .g-2{grid-area:isi}
+  [data-page="proyeksi"] > .rec{grid-area:rec}
+  [data-page="proyeksi"] > .closing{grid-area:close; min-height:0}
+  [data-page="proyeksi"] > .src{grid-area:src}
+  [data-page="proyeksi"] > .pager{grid-area:pager}
+  .rec{gap:12px}
+  .rec .card p{font-size:12.5px}
+  .closing p{font-size:clamp(17px,1.4vw,22px); padding:16px 20px}
+  .calc{gap:8px}
+}
+
+/* mode satu layar untuk layar pendek (mis. laptop 1366 x 768): semua dibuat lebih rapat */
+@media (min-width: 1100px) and (min-height: 580px) and (max-height: 780px){
+  main{padding:8px 16px; gap:8px}
+  .page{gap:8px}
+  .page .grid{gap:8px}
+  .topbar .pill{min-height:26px; font-size:11.5px}
+  .eyebrow{font-size:10.5px; padding:2px 9px 2px 8px}
+  h1{font-size:clamp(19px, 1.6vw, 24px)}
+  .lede{font-size:12.5px; line-height:1.45}
+  .card{padding:9px 13px; gap:5px; border-radius:13px}
+  .card h2{font-size:14px}
+  .card .sub,.legend{font-size:11.5px}
+  .src{font-size:10.5px}
+  .kpi{padding:8px 12px; gap:10px}
+  .kpi .kic{width:32px; height:32px; border-radius:9px}
+  .kpi .kic .ic{width:18px; height:18px}
+  .kpi .label{font-size:11.5px; line-height:1.3}
+  .kpi .value{font-size:20px}
+  .kpi .foot{font-size:11px; line-height:1.3}
+  .hero-text{padding:12px 18px; gap:6px}
+  .hero .q{font-size:12.5px}
+  .hero .idea{padding:7px 10px; font-size:12px; line-height:1.4}
+  .steps{gap:6px}
+  .steps li{grid-template-columns:24px 1fr; gap:8px}
+  .steps .n{width:24px; height:24px; font-size:12px}
+  .steps b{font-size:13px}
+  .steps span{font-size:12px; line-height:1.4}
+  .face{grid-template-columns:48px 1fr; padding-top:6px}
+  .face .photo{width:48px; height:48px}
+  .face p{font-size:11px}
+  .seg button{min-height:28px; font-size:12px}
+  .pager a{min-height:30px; font-size:12.5px; padding:0 14px}
+  .dose b{font-size:19px}
+  .dose div{padding:7px 10px}
+  .note-box{font-size:11.5px}
+  .calc .out b{font-size:18px}
+  .calc label{font-size:13px}
+  .rec .card p{font-size:12px; line-height:1.4}
+  .rec .top .kic{width:30px; height:30px}
+  .closing p{font-size:clamp(15px,1.25vw,19px)}
+  .side{padding:14px 12px}
+  .nav a{min-height:44px; padding:6px 10px}
+  .side-card{min-height:130px}
+  /* halaman 1: hero selebar penuh (teks tidak terlipat banyak), KPI satu baris di bawahnya */
+  /* Baris tidak boleh lebih kecil dari isinya: kalau tetap tidak muat, area utama di-scroll sedikit,
+     bukan isinya bertumpuk. Grafik minimal 150px agar tetap terbaca. */
+  .page > *, .page .grid, .page .card{min-height:auto}
+  .page > .g-2, .page > .g-2e{grid-template-rows:minmax(auto,1fr)}
+  .page .chart{min-height:150px}
+  [data-page="celah"]{grid-template-rows:auto minmax(auto,1fr) auto auto}
+  [data-page="provinsi"]{grid-template-rows:auto minmax(auto,1fr) auto auto}
+  [data-page="proyeksi"]{grid-template-rows:auto minmax(auto,1fr) auto auto auto}
+  [data-page="gambaran"]{grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto auto minmax(auto,1fr) auto;
+    grid-template-areas:"hero" "kpi" "src" "isi" "pager"}
+  [data-page="gambaran"] > .g-kpi{grid-template-columns:repeat(4,minmax(0,1fr))}
+  [data-page="gambaran"] .hero{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
+  /* "Apa artinya" mengikuti tinggi kartu grafik di sebelahnya dan di-scroll di dalam kartunya sendiri */
+  [data-page="gambaran"] .g-2 > .card:last-child{overflow:auto; contain:size}
+}
+
+/* ---------- layar sedang dan kecil: halaman di-scroll biasa ---------- */
 @media (max-width: 1080px){
   .g-2,.g-2e{grid-template-columns:minmax(0,1fr)}
   .rec{grid-template-columns:minmax(0,1fr)}
@@ -208,6 +339,7 @@ th{color:var(--muted); font-weight:600}
   .side{position:static; height:auto; overflow:visible; border-right:0; border-bottom:1px solid var(--line); padding:14px max(16px, env(safe-area-inset-left,0px)) 12px}
   .brand{padding-bottom:8px}
   .side-label,.side-foot,.side-card{display:none}
+  .credits{order:9; padding:6px 4px 0}
   .nav{flex-direction:row; flex-wrap:wrap}
   .nav a{flex:1 1 150px}
   main{padding:16px max(16px, env(safe-area-inset-right,0px)) 32px max(16px, env(safe-area-inset-left,0px))}
@@ -218,5 +350,5 @@ th{color:var(--muted); font-weight:600}
   .calc .out{grid-template-columns:minmax(0,1fr)}
   .closing .photo{inset:0}
 }
-@media (max-width: 520px){ .g-kpi{grid-template-columns:minmax(0,1fr)} .kpi .value{font-size:28px} }
+@media (max-width: 520px){ .g-kpi{grid-template-columns:minmax(0,1fr)} .kpi .value{font-size:26px} }
 @media (prefers-reduced-motion: no-preference){ .page{animation:rise .35s ease-out} @keyframes rise{from{opacity:.5; transform:translateY(6px)}to{opacity:1; transform:none}} }
