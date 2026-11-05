@@ -9,6 +9,9 @@ const f1 = new Intl.NumberFormat("id-ID", {minimumFractionDigits:1, maximumFract
 function el(tag, attrs, parent){ const e = document.createElementNS(NS, tag); for (const k in (attrs||{})) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
 function txt(parent, x, y, s, cls, anchor){ const t = el("text", {x, y, "text-anchor": anchor||"start"}, parent); if (cls) t.setAttribute("class", cls); t.textContent = s; return t; }
 function div(cls, parent){ const d = document.createElement("div"); if (cls) d.className = cls; if (parent) parent.appendChild(d); return d; }
+/* Tinggi grafik: di layar lebar (mode satu layar) kotak .chart diberi tinggi oleh tata letak,
+   jadi grafik mengisi kotak itu. Di layar kecil kotaknya tanpa tinggi, jadi dipakai tinggi bawaan. */
+function tinggiGrafik(host, bawaan){ const h = host.clientHeight; return h >= 120 ? h : bawaan; }
 function legend(host, items){
   host.textContent = "";
   items.forEach(it => { const s = document.createElement("span"); const k = document.createElement("i");
@@ -31,7 +34,7 @@ function tipRow(tip, color, value, name, dash){
 function lineChart(host, cfg){
   host.textContent = "";
   const W = Math.max(300, host.clientWidth), narrow = W < 520;
-  const H = cfg.height || 300, m = {l:40, r: narrow ? 14 : (cfg.right||118), t:18, b:30};
+  const H = tinggiGrafik(host, cfg.height || 300), m = {l:40, r: narrow ? 14 : (cfg.right||118), t:18, b:30};
   const svg = el("svg", {viewBox:`0 0 ${W} ${H}`, role:"img", "aria-label":cfg.label, tabindex:"0"}, host);
   const x0 = cfg.x[0], x1 = cfg.xMax || cfg.x[cfg.x.length-1];
   const sx = v => m.l + (v - x0) / (x1 - x0) * (W - m.l - m.r);
@@ -44,7 +47,11 @@ function lineChart(host, cfg){
     b.x.forEach((xv,i) => d += (i ? "L" : "M") + sx(xv).toFixed(1) + "," + sy(b.hi[i]).toFixed(1));
     for (let i = b.x.length-1; i >= 0; i--) d += "L" + sx(b.x[i]).toFixed(1) + "," + sy(b.lo[i]).toFixed(1);
     el("path", {d: d + "Z", style:`fill:${b.color}; fill-opacity:.12`}, svg); }
-  (cfg.refs||[]).forEach(r => { el("line", {x1:m.l, x2:W-m.r, y1:sy(r.y), y2:sy(r.y), class:"ref"}, svg); txt(svg, m.l+6, sy(r.y)-6, r.label, "lbl"); });
+  // label garis acuan di atas garisnya; kalau terlalu dekat dengan label sebelumnya (grafik pendek), pindah ke bawah garis
+  let yLabelAcuan = -Infinity;
+  (cfg.refs||[]).forEach(r => { el("line", {x1:m.l, x2:W-m.r, y1:sy(r.y), y2:sy(r.y), class:"ref"}, svg);
+    let ly = sy(r.y) - 6; if (Math.abs(ly - yLabelAcuan) < 14) ly = sy(r.y) + 14; yLabelAcuan = ly;
+    txt(svg, m.l+6, ly, r.label, "lbl"); });
   (cfg.xrefs||[]).forEach(r => { el("line", {x1:sx(r.x), x2:sx(r.x), y1:m.t, y2:H-m.b, class:"ref"}, svg); txt(svg, sx(r.x)+5, H-m.b-6, r.label, "lbl"); });
   const g = el("g", {}, svg);
   cfg.series.filter(s => s.area).forEach(s => { const xs = s.x || cfg.x, id = "ga" + (++GID);
@@ -89,7 +96,9 @@ function lineChart(host, cfg){
 function barChart(host, cfg){
   host.textContent = "";
   const W = Math.max(300, host.clientWidth), narrow = W < 520;
-  const labW = narrow ? 128 : 178, rowH = cfg.rowH || 20, m = {t:6, b:24, r:48};
+  const labW = narrow ? 128 : 178, m = {t:6, b:24, r:48};
+  const ruang = tinggiGrafik(host, 0);  // di mode satu layar, tinggi baris dibagi rata dari ruang yang ada
+  const rowH = ruang ? Math.max(14, Math.min(40, Math.floor((ruang - m.t - m.b) / cfg.rows.length))) : (cfg.rowH || 20);
   const H = m.t + m.b + cfg.rows.length * rowH;
   const svg = el("svg", {viewBox:`0 0 ${W} ${H}`, role:"img", "aria-label":cfg.label}, host);
   const min = narrow && cfg.minNarrow != null ? cfg.minNarrow : cfg.min;
@@ -116,7 +125,7 @@ function barChart(host, cfg){
 /* ---------- scatter (log x) ---------- */
 function scatter(host, cfg){
   host.textContent = "";
-  const W = Math.max(300, host.clientWidth), narrow = W < 520, H = 320, m = {l:40, r:18, t:16, b:34};
+  const W = Math.max(300, host.clientWidth), narrow = W < 520, H = tinggiGrafik(host, 320), m = {l:40, r:18, t:16, b:34};
   const svg = el("svg", {viewBox:`0 0 ${W} ${H}`, role:"img", "aria-label":cfg.label}, host);
   const lx0 = Math.log10(1000), lx1 = Math.log10(150000);
   const sx = v => m.l + (Math.log10(v) - lx0) / (lx1 - lx0) * (W - m.l - m.r);
